@@ -12,10 +12,10 @@ const SCREENS = [
 
 const removeChildren = (el, selector) => {
   selector = selector || `*`;
-  let childEl;
+  let child;
 
-  while ((childEl = el.querySelector(selector))) {
-    el.removeChild(childEl);
+  while ((child = el.querySelector(selector))) {
+    el.removeChild(child);
   }
 };
 
@@ -51,5 +51,43 @@ document.addEventListener(`keydown`, (evt) => {
       break;
   }
 });
+
+const bodyEl = document.querySelector(`body`);
+const arrowsEl = document.createElement(`div`);
+
+arrowsEl.classList.add(`arrows__wrap`);
+arrowsEl.innerHTML = `
+  <style>
+    .arrows__wrap {
+      position: absolute;
+      top: 95px;
+      left: 50%;
+      margin-left: -56px;
+    }
+    .arrows__btn {
+      background: none;
+      border: 2px solid black;
+      padding: 5px 20px;
+    }
+  </style>
+  <button class="arrows__btn"><-</button>
+  <button class="arrows__btn">-></button>
+`;
+
+const arrowBtns = arrowsEl.querySelectorAll(`.arrows__btn`);
+const arrowLeft = arrowBtns[0];
+const arrowRight = arrowBtns[1];
+
+arrowLeft.addEventListener(`click`, (evt) => {
+  evt.preventDefault();
+  showScreen(currentScreen - 1);
+});
+
+arrowRight.addEventListener(`click`, (evt) => {
+  evt.preventDefault();
+  showScreen(currentScreen + 1);
+});
+
+bodyEl.appendChild(arrowsEl);
 
 showScreen(0);
