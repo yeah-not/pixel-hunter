@@ -11,28 +11,26 @@
     "test": "npm run eslint && npm run stylelint && gulp test"
   },
   "devDependencies": {
-    "autoprefixer": "9.0.2",
+    "autoprefixer": "^10.2.5",
     "browser-sync": "^2.26.14",
-    "css-mqpacker": "7.0.0",
-    "del": "3.0.0",
-    "eslint": "5.7.0",
-    "eslint-config-htmlacademy": "0.5.x",
+    "css-mqpacker": "^7.0.0",
+    "del": "^6.0.0",
+    "eslint": "^7.25.0",
+    "eslint-config-htmlacademy": "^3.0.0",
     "gulp": "^4.0.2",
     "gulp-better-rollup": "^4.0.1",
-    "gulp-csso": "3.0.1",
-    "gulp-imagemin": "4.1.0",
-    "gulp-plumber": "1.2.0",
-    "gulp-postcss": "7.0.1",
-    "gulp-rename": "1.4.0",
+    "gulp-csso": "^4.0.1",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^9.0.0",
+    "gulp-rename": "^2.0.0",
     "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^3.0.0",
-    "gulp-svgstore": "6.1.1",
+    "gulp-svgstore": "^7.0.1",
     "node-sass": "^5.0.0",
+    "postcss": "^8.2.14",
     "rollup": "^1.32.1",
-    "stylelint": "9.4.x",
-    "stylelint-config-htmlacademy": "0.1.x"
-  },
-  "engines": {
-    "node": "10"
+    "stylelint": "^13.13.1",
+    "stylelint-config-htmlacademy": "^0.1.4"
   }
 }
