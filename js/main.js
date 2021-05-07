@@ -1,5 +1,3 @@
-'use strict';
-
 const SCREENS = [
   document.querySelector(`#intro`).content,
   document.querySelector(`#greeting`).content,

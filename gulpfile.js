@@ -14,6 +14,9 @@ const rename = require(`gulp-rename`);
 const imagemin = require(`gulp-imagemin`);
 const svgstore = require(`gulp-svgstore`);
 
+const rollup = require(`gulp-better-rollup`);
+const sourcemaps = require(`gulp-sourcemaps`);
+
 gulp.task(`style`, () => {
   return gulp.src(`sass/style.scss`)
     .pipe(plumber())
@@ -56,8 +59,11 @@ gulp.task(`imagemin`, () => {
 });
 
 gulp.task(`scripts`, () => {
-  return gulp.src(`js/**/*.js`)
+  return gulp.src(`js/main.js`)
     .pipe(plumber())
+    .pipe(sourcemaps.init())
+    .pipe(rollup({}, `iife`))
+    .pipe(sourcemaps.write(``))
     .pipe(gulp.dest(`build/js/`))
     .pipe(server.stream());
 });
