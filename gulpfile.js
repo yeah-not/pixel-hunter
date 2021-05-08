@@ -1,18 +1,24 @@
 'use strict';
 
-const del = require(`del`);
 const gulp = require(`gulp`);
+
+const plumber = require(`gulp-plumber`);
+const del = require(`del`);
+const rename = require(`gulp-rename`);
+const sourcemaps = require(`gulp-sourcemaps`);
+const server = require(`browser-sync`).create();
+
 const sass = require(`gulp-sass`);
 sass.compiler = require(`node-sass`);
-const plumber = require(`gulp-plumber`);
 const postcss = require(`gulp-postcss`);
 const autoprefixer = require(`autoprefixer`);
-const server = require(`browser-sync`).create();
 const mqpacker = require(`css-mqpacker`);
 const minify = require(`gulp-csso`);
-const rename = require(`gulp-rename`);
+
 const imagemin = require(`gulp-imagemin`);
 const svgstore = require(`gulp-svgstore`);
+
+const rollup = require(`gulp-better-rollup`);
 
 gulp.task(`style`, () => {
   return gulp.src(`sass/style.scss`)
@@ -20,7 +26,7 @@ gulp.task(`style`, () => {
     .pipe(sass())
     .pipe(postcss([
       autoprefixer({
-        browsers: [
+        overrideBrowserslist: [
           `last 1 version`,
           `last 2 Chrome versions`,
           `last 2 Firefox versions`,
@@ -50,14 +56,17 @@ gulp.task(`imagemin`, () => {
   return gulp.src(`build/img/**/*.{jpg,png,gif}`)
     .pipe(imagemin([
       imagemin.optipng({optimizationLevel: 3}),
-      imagemin.jpegtran({progressive: true})
+      imagemin.mozjpeg({quality: 85, progressive: true}),
     ]))
     .pipe(gulp.dest(`build/img`));
 });
 
 gulp.task(`scripts`, () => {
-  return gulp.src(`js/**/*.js`)
+  return gulp.src(`js/main.js`)
     .pipe(plumber())
+    .pipe(sourcemaps.init())
+    .pipe(rollup({}, `iife`))
+    .pipe(sourcemaps.write(``))
     .pipe(gulp.dest(`build/js/`))
     .pipe(server.stream());
 });
