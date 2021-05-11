@@ -1,7 +1,8 @@
 // Игровой экран - Правила игры
 // --------------------------------
 
-import {getDomElement} from './util.js';
+import {getDomElement, changeScreen} from './util.js';
+import screenGame01 from './screen-game-1.js';
 
 const template = `
   <header class="header">
@@ -32,6 +33,23 @@ const template = `
     </form>
   </section>
 `;
+
 const element = getDomElement(template);
+const form = element.querySelector(`.rules__form`);
+const nameInput = form.querySelector(`.rules__input`);
+const submitBtn = form.querySelector(`.rules__button`);
+
+nameInput.addEventListener(`input`, () => {
+  if (nameInput.value === ``) {
+    submitBtn.disabled = true;
+  } else {
+    submitBtn.disabled = false;
+  }
+});
+
+form.addEventListener(`submit`, (evt) => {
+  evt.preventDefault();
+  changeScreen(screenGame01);
+});
 
 export default element;

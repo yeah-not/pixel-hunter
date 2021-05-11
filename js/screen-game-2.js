@@ -1,7 +1,8 @@
 // Игровой экран с одним изображением
 // --------------------------------
 
-import {getDomElement} from './util.js';
+import {getDomElement, changeScreen} from './util.js';
+import screenGame03 from './screen-game-3.js';
 
 const template = `
   <header class="header">
@@ -50,6 +51,15 @@ const template = `
     </ul>
   </section>
 `;
+
 const element = getDomElement(template);
+const form = element.querySelector(`.game__content`);
+const questionRadios = form.elements[`question1`];
+
+form.addEventListener(`change`, () => {
+  if (questionRadios.value) {
+    changeScreen(screenGame03);
+  }
+});
 
 export default element;

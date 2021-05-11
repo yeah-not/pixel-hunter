@@ -1,7 +1,8 @@
 // Игровой экран - Приветствие
 // ---------------------------
 
-import {getDomElement} from './util.js';
+import {getDomElement, changeScreen} from './util.js';
+import screenRules from './screen-rules.js';
 
 const template = `
   <section class="greeting central--blur">
@@ -25,6 +26,10 @@ const template = `
     </button>
   </section>
 `;
+
 const element = getDomElement(template);
+const continueBtn = element.querySelector(`.greeting__continue`);
+
+continueBtn.addEventListener(`click`, () => changeScreen(screenRules));
 
 export default element;

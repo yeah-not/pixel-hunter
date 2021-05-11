@@ -1,7 +1,8 @@
 // Игровой экран с двумя изображениями
 // --------------------------------
 
-import {getDomElement} from './util.js';
+import {getDomElement, changeScreen} from './util.js';
+import screenGame02 from './screen-game-2.js';
 
 const template = `
   <header class="header">
@@ -61,6 +62,16 @@ const template = `
     </ul>
   </section>
 `;
+
 const element = getDomElement(template);
+const form = element.querySelector(`.game__content`);
+const questionOneRadios = form.elements[`question1`];
+const questionTwoRadios = form.elements[`question2`];
+
+form.addEventListener(`change`, () => {
+  if (questionOneRadios.value && questionTwoRadios.value) {
+    changeScreen(screenGame02);
+  }
+});
 
 export default element;

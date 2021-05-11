@@ -1,7 +1,8 @@
 // Игровой экран с тремя изображениями
 // --------------------------------
 
-import {getDomElement} from './util.js';
+import {getDomElement, changeScreen} from './util.js';
+import screenStats from './screen-stats.js';
 
 const template = `
   <header class="header">
@@ -48,6 +49,13 @@ const template = `
     </ul>
   </section>
 `;
+
 const element = getDomElement(template);
+const form = element.querySelector(`.game__content`);
+const optionElList = form.querySelectorAll(`.game__option`);
+
+Array.from(optionElList).forEach((optionEl) => {
+  optionEl.addEventListener(`click`, () => changeScreen(screenStats));
+});
 
 export default element;
