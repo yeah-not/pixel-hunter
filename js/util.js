@@ -4,4 +4,11 @@ const getDomElement = (template) => {
   return element;
 };
 
-export {getDomElement};
+const mainEl = document.querySelector(`#main`);
+
+const changeScreen = (element) => {
+  mainEl.innerHTML = ``;
+  mainEl.appendChild(element);
+};
+
+export {getDomElement, changeScreen};
