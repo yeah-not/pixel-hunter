@@ -2,6 +2,7 @@
 // --------------------------------
 
 import {getDomElement, changeScreen} from './util.js';
+import screenGreeting from './screen-greeting.js';
 import screenGame02 from './screen-game-2.js';
 
 const template = `
@@ -64,6 +65,10 @@ const template = `
 `;
 
 const element = getDomElement(template);
+const backBtn = element.querySelector(`.back`);
+
+backBtn.addEventListener(`click`, () => changeScreen(screenGreeting));
+
 const form = element.querySelector(`.game__content`);
 const questionOneRadios = form.elements[`question1`];
 const questionTwoRadios = form.elements[`question2`];

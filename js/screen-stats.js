@@ -1,7 +1,8 @@
 // Игровой экран - Общая статистика по всем игрокам
 // ------------------------------------------------
 
-import {getDomElement} from './util.js';
+import {getDomElement, changeScreen} from './util.js';
+import screenGreeting from './screen-greeting.js';
 
 const template = `
   <header class="header">
@@ -116,6 +117,10 @@ const template = `
     </table>
   </section>
 `;
+
 const element = getDomElement(template);
+const backBtn = element.querySelector(`.back`);
+
+backBtn.addEventListener(`click`, () => changeScreen(screenGreeting));
 
 export default element;
