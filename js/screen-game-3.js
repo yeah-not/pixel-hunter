@@ -53,14 +53,9 @@ const template = `
 
 const element = getDomElement(template);
 const backBtn = element.querySelector(`.back`);
+const form = element.querySelector(`.game__content`);
 
 backBtn.addEventListener(`click`, () => changeScreen(screenGreeting));
-
-const form = element.querySelector(`.game__content`);
-const optionElList = form.querySelectorAll(`.game__option`);
-
-Array.from(optionElList).forEach((optionEl) => {
-  optionEl.addEventListener(`click`, () => changeScreen(screenStats));
-});
+form.addEventListener(`click`, () => changeScreen(screenStats));
 
 export default element;

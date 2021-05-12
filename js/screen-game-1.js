@@ -66,15 +66,14 @@ const template = `
 
 const element = getDomElement(template);
 const backBtn = element.querySelector(`.back`);
+const form = element.querySelector(`.game__content`);
 
 backBtn.addEventListener(`click`, () => changeScreen(screenGreeting));
 
-const form = element.querySelector(`.game__content`);
-const questionOneRadios = form.elements[`question1`];
-const questionTwoRadios = form.elements[`question2`];
-
 form.addEventListener(`change`, () => {
-  if (questionOneRadios.value && questionTwoRadios.value) {
+  const formData = new FormData(form);
+
+  if (formData.has(`question1`) && formData.has(`question2`)) {
     changeScreen(screenGame02);
   }
 });
