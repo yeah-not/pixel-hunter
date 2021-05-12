@@ -1,5 +1,3 @@
-'use strict';
-
 const gulp = require(`gulp`);
 
 const plumber = require(`gulp-plumber`);
@@ -111,5 +109,6 @@ gulp.task(`serve`, () => {
 });
 
 
-gulp.task(`test`, () => {
+gulp.task(`test`, (done) => {
+  done();
 });
