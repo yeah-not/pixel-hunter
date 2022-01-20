@@ -6,14 +6,15 @@ const rename = require(`gulp-rename`);
 const sourcemaps = require(`gulp-sourcemaps`);
 const server = require(`browser-sync`).create();
 
-const sass = require(`gulp-sass`);
-sass.compiler = require(`node-sass`);
+const sass = require(`gulp-sass`)(require(`sass`));
 const postcss = require(`gulp-postcss`);
 const autoprefixer = require(`autoprefixer`);
 const mqpacker = require(`css-mqpacker`);
 const minify = require(`gulp-csso`);
 
 const imagemin = require(`gulp-imagemin`);
+// const imageminPngquant = require(`imagemin-pngquant`);
+const imageminJpegtran = require(`imagemin-jpegtran`);
 const svgstore = require(`gulp-svgstore`);
 
 const rollup = require(`gulp-better-rollup`);
@@ -55,6 +56,9 @@ gulp.task(`sprite`, () => {
 
 gulp.task(`imagemin`, () => {
   return gulp.src(`build/img/**/*.{jpg,png,gif}`)
+    .pipe(imagemin([
+      imageminJpegtran({progressive: true}),
+    ], {verbose: true}))
     .pipe(imagemin([
       imagemin.optipng({optimizationLevel: 3}),
       imagemin.mozjpeg({quality: 85, progressive: true}),
