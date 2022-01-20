@@ -55,15 +55,23 @@ gulp.task(`sprite`, () => {
 });
 
 gulp.task(`imagemin`, () => {
-  return gulp.src(`build/img/**/*.{jpg,png,gif}`)
+  return gulp.src(`img/**/*.{jpg,png,gif}`)
     .pipe(imagemin([
       imageminJpegtran({progressive: true}),
-    ], {verbose: true}))
+    ], {
+      verbose: true
+    }))
+    // .pipe(rename({suffix: `.min`}))
+    // .pipe(gulp.dest(`build/img`))
+    // .pipe(rename({prefix: `Промо `}))
     .pipe(imagemin([
       imagemin.optipng({optimizationLevel: 3}),
-      imagemin.mozjpeg({quality: 85, progressive: true}),
-    ]))
-    .pipe(gulp.dest(`build/img`));
+      imagemin.mozjpeg({quality: 90, progressive: true}),
+    ], {
+      verbose: true
+    }))
+    // .pipe(rename({suffix: `.min`}))
+    .pipe(gulp.dest(`build`));
 });
 
 gulp.task(`scripts`, () => {
@@ -85,7 +93,7 @@ gulp.task(`copy-html`, () => {
 gulp.task(`copy-base`, () => {
   return gulp.src([
     `fonts/**/*.{woff,woff2}`,
-    `img/*.*`,
+    `img/**/*`,
     `*.ico`
   ], {base: `.`})
     .pipe(gulp.dest(`build`));
@@ -99,7 +107,8 @@ gulp.task(`clean`, () => {
 
 gulp.task(`assemble`, gulp.series(`clean`, `copy`, `style`));
 
-gulp.task(`build`, gulp.series(`assemble`, `imagemin`));
+// gulp.task(`build`, gulp.series(`assemble`, `imagemin`));
+gulp.task(`build`, gulp.series(`clean`, `imagemin`));
 
 gulp.task(`serve`, () => {
   server.init({
